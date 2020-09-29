@@ -2,10 +2,9 @@
   "name": "developers-connector-social-app",
   "version": "1.0.0",
   "description": "A developers-connector-social-media-app using MERN( mongoDB, express, react &amp; redux, and nodejs ) Stack(Full Stack App). that can help to connect developers community.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
