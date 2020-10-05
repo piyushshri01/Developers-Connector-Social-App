@@ -37,7 +37,7 @@ router.post('/register', (req, res) => {
     .then(user => {
         if(user) {
             errors.email = 'Email already exists';
-            return res.status(400).json({errors});
+            return res.status(400).json(errors);
         } else {
             const avatar = gravatar.url(req.body.email, {
                 s: '200', // Size
@@ -86,7 +86,7 @@ router.post('/login', (req, res) => {
             // check for user
             if(!user){
                 errors.email = 'User not found';
-                return res.status(404).json({ errors })
+                return res.status(404).json(errors)
             }
 
             // Check Password
@@ -105,12 +105,12 @@ router.post('/login', (req, res) => {
                         (err, token) => {
                             res.json({
                                 success: true,
-                                toekn: 'Bearer ' + token
+                                token: 'Bearer ' + token
                             })
                     });
                 } else {
                     errors.password = 'Password Incorrect'
-                    return res.status(400).json({ errors });
+                    return res.status(400).json(errors);
                 }
             })
         })
