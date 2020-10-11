@@ -5,14 +5,20 @@ import ProfileActions from './ProfileActions';
 
 // redux stuff
 import { connect } from 'react-redux'
-import { getCurrentProfile } from '../redux/actions/profileActions';
+import { getCurrentProfile, deleteAccount } from '../redux/actions/profileActions';
 
 import Spinner from '../common/Spinner';
 
 class Dashboard extends Component {
+
     componentDidMount() {
         this.props.getCurrentProfile();
     }
+
+    onDeleteClick = () => {
+        this.props.deleteAccount();
+    }
+
     render() {
         const { user } = this.props.auth;
         const { profile, loading } = this.props.profile;
@@ -29,6 +35,9 @@ class Dashboard extends Component {
                         <p className="lead text-muted">Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link> </p>
 
                         <ProfileActions/>
+                        {/* TODO: exp and edu */}
+                        <div style={{ marginBottom: '60px' }}/>
+                        <button className="btn btn-danger" onClick={this.onDeleteClick}>Delete My Account</button>
                     </div>
                 )
             } else {
@@ -62,6 +71,7 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
     getCurrentProfile: PropTypes.func.isRequired,
+    deleteAccount: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     profile: PropTypes.object.isRequired
 }
@@ -71,4 +81,4 @@ const mapStateToProps = (state) => ({
     auth: state.auth
 });
 
-export default connect(mapStateToProps, { getCurrentProfile })(Dashboard);
+export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(Dashboard);
